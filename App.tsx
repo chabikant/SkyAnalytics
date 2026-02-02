@@ -1,5 +1,5 @@
 
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from './app/store';
 import { fetchWeather, setSelectedCity, clearError } from './features/weather/weatherSlice';
@@ -21,15 +21,19 @@ const App: React.FC = () => {
   const { cities: favorites } = useSelector((state: RootState) => state.favorites);
   const { unit } = useSelector((state: RootState) => state.settings);
   const { cachedData, selectedCity, loading, insights, error } = useSelector((state: RootState) => state.weather);
+  const initialSyncRef = useRef(false);
 
   // Background sync for favorites on mount
   useEffect(() => {
-    favorites.forEach(city => {
-      if (!cachedData[city]) {
-        dispatch(fetchWeather(city));
-      }
-    });
-  }, [favorites, dispatch]); // cachedData not in deps to prevent loop
+    if (!initialSyncRef.current) {
+      favorites.forEach(city => {
+        if (!cachedData[city]) {
+          dispatch(fetchWeather(city));
+        }
+      });
+      initialSyncRef.current = true;
+    }
+  }, [favorites, dispatch, cachedData]);
 
   const handleSearch = useCallback((query: string) => {
     if (!query.trim()) return;
