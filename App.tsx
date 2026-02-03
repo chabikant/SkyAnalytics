@@ -50,10 +50,10 @@ const App: React.FC = () => {
   }, [dispatch]);
 
   const quickAccessCities = [
-    { name: 'London', icon: 'fa-landmark' },
-    { name: 'New York', icon: 'fa-city' },
-    { name: 'Tokyo', icon: 'fa-torii-gate' },
-    { name: 'Dubai', icon: 'fa-archway' }
+    { name: 'Delhi', icon: 'fa-landmark' },
+    { name: 'Mumbai', icon: 'fa-city' },
+    { name: 'Kolkata', icon: 'fa-torii-gate' },
+    { name: 'Bengaluru', icon: 'fa-archway' }
   ];
 
   return (
