@@ -59,7 +59,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading }) => 
     <form onSubmit={handleSubmit} className="relative w-full max-w-xl">
       <input 
         type="text" 
-        placeholder="Search cities (e.g., London, Tokyo, New York)..."
+        placeholder="Search cities (e.g.,Delhi, Kolkata, Mumbai)..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         disabled={isLoading}
